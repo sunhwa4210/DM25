@@ -1,14 +1,12 @@
 /* =========================================
    1) 기본 구간: 모바일 (250 ~ 699)
-   - 모바일에서는 햄버거 버튼만 보이고
-   - 상단 nav는 숨겨두는 기준으로 잡을게
 ========================================= */
 
 /* 헤더 전체 배경 */
 .headerWrapper {
   width: 100%;
   position: relative;
-  z-index: 10; /* 콘텐츠 스택보다 위에 표시 */
+  z-index: 10; /* 콘텐츠 스택보다 위 */
   padding: 0 12px;
   box-sizing: border-box;
 }
@@ -21,10 +19,10 @@
 
 /* 안쪽 그리드에서 헤더 정렬 */
 .header-inner {
-  height: 56px;                     /* 모바일은 조금 낮게 */
+  height: 56px;
   display: flex;
   align-items: center;
-  justify-content: space-between;   /* 로고 왼쪽 / 메뉴 오른쪽 */
+  justify-content: space-between;
   gap: 6px;
   min-width: 0;
 }
@@ -32,7 +30,7 @@
 /* 로고 영역 */
 .header-logo img {
   display: block;
-  height: 26px;                     /* 360 이하에서도 안전 */
+  height: 26px;
   max-width: 120px;
 }
 
@@ -65,7 +63,7 @@
     "Helvetica Neue", Arial, sans-serif;
 }
 
-/* 모바일 햄버거 버튼: 기본(모바일)에서는 보임 */
+/* 모바일 햄버거 버튼 */
 .menu-button {
   width: 28px;
   height: 28px;
@@ -76,7 +74,7 @@
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
-  flex-shrink: 0; /* 폭이 좁아도 사라지지 않도록 */
+  flex-shrink: 0;
 }
 
 .menu-button img {
@@ -85,7 +83,7 @@
   object-fit: contain;
 }
 
-/* 250~699 구간: 모바일 동작 보장(햄버거 보이고 nav 숨김) */
+/* 250~699 구간: 모바일 동작 보장 */
 @media (max-width: 699px) {
   .header-nav {
     display: none;
@@ -95,7 +93,9 @@
   }
 }
 
-/* 모바일 사이드 메뉴 */
+/* =========================================
+   모바일 사이드 메뉴
+========================================= */
 .side-menu {
   position: fixed;
   top: 0;
@@ -107,45 +107,50 @@
   transform: translateX(100%);
   transition: transform 0.25s ease-out;
   padding: 80px 24px 24px;
-  z-index: 1000;
-  pointer-events: auto;
+
+  /* 핵심: 메뉴가 backdrop보다 위 */
+  z-index: 9999;
+
   will-change: transform;
+
+  /* 핵심: 닫힌 상태에서는 클릭 못 하게 */
+  pointer-events: none;
+}
+
+.side-menu.is-open {
+  transform: translateX(0);
+  pointer-events: auto;
 }
 
 .side-menu-nav {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  pointer-events: auto;
 }
 
-.side-menu-nav button {
+.side-menu-nav a {
   display: block;
   padding: 10px 0;
   text-decoration: none;
   color: #111;
   font-size: 16px;
   line-height: 1.4;
-  background: transparent;
-  border: none;
-  text-align: left;
-  cursor: pointer;
 }
 
-/* 메뉴 열렸을 때 */
-.side-menu.is-open {
-  transform: translateX(0);
-}
-
-/* 배경 어둡게 */
+/* backdrop */
 .side-menu-backdrop {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0);
   opacity: 0;
+
+  /* 닫혀있을 땐 클릭 불가 */
   pointer-events: none;
+
   transition: opacity 0.2s ease-out;
-  z-index: 900;
+
+  /* 메뉴보다 아래 */
+  z-index: 9998;
 }
 
 .side-menu-backdrop.is-open {
@@ -154,51 +159,41 @@
   pointer-events: auto;
 }
 
-
-
 /* =========================================
    2) 700px 이상: 태블릿 / 데스크탑
-   - 상단 nav를 보이고, 햄버거/사이드메뉴는 숨김
 ========================================= */
 @media (min-width: 700px) {
-
   .header-inner {
-    height: 72px;          /* 헤더 조금 더 높게 */
+    height: 72px;
   }
 
   .header-logo img {
-    height: 32px;          /* 로고도 조금 키우기 */
+    height: 32px;
   }
 
   .header-nav {
-    display: flex;         /* 메뉴 보이기 */
+    display: flex;
   }
 
   .menu-button {
-    display: none;         /* 햄버거 숨기기 */
+    display: none;
   }
 
-  /* 데스크탑에서는 사이드 메뉴/백드롭 안 쓰게 */
   .side-menu,
   .side-menu-backdrop {
     display: none;
   }
 }
 
-
-
 /* =========================================
    3) 1440px 이상: 큰 데스크탑
-   - 실제로는 .inner에서 max-width:1440을 쓰고 있으니까
-   - 여기서는 필요하면 디테일만 추가로 조정
 ========================================= */
 @media (min-width: 1440px) {
-
   .header-inner {
-    height: 80px;          /* 원하면 더 키우기, 아니면 이 블록 통째로 빼도 됨 */
+    height: 80px;
   }
 
   .header-nav a {
-    font-size: 15px;       /* 큰 화면에서 글자 살짝 키우기 (선택 사항) */
+    font-size: 15px;
   }
 }
