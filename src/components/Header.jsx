@@ -1,12 +1,14 @@
 // src/components/Header.jsx
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDeviceType } from "../hook/useDeviceType";
 import "./Header.css";
 import Logo from "../assets/img/logo.png";
+import MenuIcon from "../assets/img/menu.svg";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   // 디바이스 타입 (너가 이미 만든 훅 그대로 사용)
   const { isDesktop, isTablet, isMobile, isSmallMobile } = useDeviceType();
@@ -16,6 +18,10 @@ function Header() {
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
   const closeMenu = () => setIsMenuOpen(false);
+  const go = (path) => {
+    navigate(path);
+    closeMenu();
+  };
 
   return (
     <div className="headerWrapper">
@@ -44,9 +50,7 @@ function Header() {
               aria-label="메뉴 열기"
               aria-expanded={isMenuOpen}
             >
-              <span />
-              <span />
-              <span />
+              <img src={MenuIcon} alt="menu" />
             </button>
           )}
         </div>
@@ -66,15 +70,15 @@ function Header() {
             className={`side-menu ${isMenuOpen ? "is-open" : ""}`}
           >
             <nav className="side-menu-nav">
-              <Link to="/" onClick={closeMenu}>
+              <button type="button" onClick={() => go("/")}>
                 About
-              </Link>
-              <Link to="/plp" onClick={closeMenu}>
+              </button>
+              <button type="button" onClick={() => go("/plp")}>
                 Projects
-              </Link>
-              <Link to="/participants" onClick={closeMenu}>
+              </button>
+              <button type="button" onClick={() => go("/participants")}>
                 Participants
-              </Link>
+              </button>
             </nav>
           </aside>
         </>
