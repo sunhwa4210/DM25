@@ -25,12 +25,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;   /* 로고 왼쪽 / 메뉴 오른쪽 */
+  gap: 6px;
+  min-width: 0;
 }
 
 /* 로고 영역 */
 .header-logo img {
   display: block;
   height: 26px;                     /* 360 이하에서도 안전 */
+  max-width: 120px;
 }
 
 /* 초소형 디바이스 보정 (250~359) */
@@ -39,10 +42,11 @@
     padding: 0 8px;
   }
   .header-inner {
-    height: 52px;
+    height: 50px;
   }
   .header-logo img {
-    height: 24px;
+    height: 22px;
+    max-width: 100px;
   }
 }
 
@@ -73,6 +77,7 @@
   justify-content: center;
   gap: 4px;
   cursor: pointer;
+  flex-shrink: 0; /* 폭이 좁아도 사라지지 않도록 */
 }
 
 .menu-button span {

@@ -109,6 +109,7 @@ body {
   max-width: 1440px;
   height: 100vh;
   min-height: 100vh;
+  min-width: 100vw;
   z-index: 1;
   pointer-events: none;
   overflow: hidden;
