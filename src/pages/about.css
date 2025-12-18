@@ -102,10 +102,11 @@ body {
 .particle-global {
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left:0;
+  transform: translateX(-50%) scale(var(--hero-scale)); /* 포스터 스케일과 동일하게 */
+  transform-origin: top center;
   width: 100%;
-  min-width: 1300px;
+  max-width: 1440px;
   height: 100vh;
   min-height: 100vh;
   z-index: 1;

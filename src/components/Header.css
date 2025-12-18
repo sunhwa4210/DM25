@@ -33,6 +33,19 @@
   height: 26px;                     /* 360 이하에서도 안전 */
 }
 
+/* 초소형 디바이스 보정 */
+@media (max-width: 360px) {
+  .headerWrapper {
+    padding: 0 10px;
+  }
+  .header-inner {
+    height: 52px;
+  }
+  .header-logo img {
+    height: 24px;
+  }
+}
+
 /* 데스크탑 네비게이션: 기본(모바일)에서는 숨김 */
 .header-nav {
   display: none;
