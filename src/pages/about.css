@@ -1,109 +1,123 @@
 html,
 body {
-  background: #00E1FF;
   margin: 0;
   padding: 0;
 }
 
 :root {
-  --hero-scale: clamp(0.6, 100vw / 1440, 1);
+  --hero-scale: clamp(0.5, 100vw / 1440, 1); /* 화면 줄어들수록 무대 축소 */
 }
 
-.page {
-  background: #00E1FF;
-  min-height: 180vh; /* 여유 스크롤 */
+/* 전체 래퍼: 단계 수에 맞게 자동 높이 확보 */
+.aboutWrap {
+  position: relative;
+  min-height: 400vh;
 }
 
-.inner {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 16px;
-  box-sizing: border-box;
-}
-
-/* 무대: sticky */
-.hero-frame {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-
-  width: min(1440px, 100%);
-  margin: 0 auto;
-
-  transform: scale(var(--hero-scale));
-  transform-origin: top center;
-}
-
-/* 배경 포스터 */
-.poster-bg {
-  position: absolute;
+/* 단계별 배경 */
+.aboutBg {
+  position: fixed;
   inset: 0;
   z-index: 0;
-  overflow: hidden;
+  transition: background 0.3s ease;
+}
+.aboutBg.bg-blue { background: #00e1ff; }
+.aboutBg.bg-white { background: #ffffff; }
+.aboutBg.bg-gray { background: #ffffff; }
+
+/* 고정 무대: 포스터 + 인포 */
+.stageFixed {
+  position: fixed;
+  top: 0;
+  left: 0%;
+  right: auto;
+  bottom: 0;
+  z-index: 1;
+
+
+  width: 100%;
+  max-width: 1440px;
+  margin: 50px auto;
+
+  transform: translateX(-50%) scale(var(--hero-scale));
+  transform-origin: top center;
+
   transition: transform 0.6s ease;
 }
 
-.poster-layer-img {
-  position: absolute;
-  inset: 0;
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: contain;
-  transition: opacity 0.6s ease;
-  pointer-events: none;
+/* 2단계에서 포스터가 위로 올라감 */
+.stageFixed.lift {
+  transform: scale(var(--hero-scale)) translateY(-220px);
 }
 
-/* 콘텐츠 */
-.contentWrapper {
+/* 포스터 레이어 */
+.posterLayer {
+  margin-top: 24px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+
+  background-size: clamp(260px, 90vw, 1440px) auto; /* 가로를 뷰포트에 맞춤 */
+  background-position: center top;
+  background-repeat: no-repeat;
+
+  opacity: 0;
+  transition: opacity 0.7s ease-in-out;
+  pointer-events: none;
+}
+.posterLayer.is-active {
+  opacity: 1;
+}
+
+/* 인포는 포스터보다 위에 */
+.infoLayer {
   position: relative;
-  width: 100%;
-  margin: 0 auto;
+  inset: auto;
+  z-index: 2;
+
+  padding: 12px 24px 24px; /* 상단 여백 축소 */
+  box-sizing: border-box;
 
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
 
-  gap: 0;
-  z-index: 2;
+  opacity: 0;
+  transform: translateY(10px); /* 시작 위치를 조금만 내려놓기 */
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
+  pointer-events: none;
 }
 
-.title {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin: 0;
-  padding: 0;
+.infoLayer.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
-/* 포스터 영역 높이 기준 */
-.poster-stack {
-  position: relative;
-  width: 100%;
-  margin: 0;
-}
-
-.poster-stack::before {
-  content: "";
-  display: block;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-}
-
-/* 파티클 */
+/* 파티클 레이어 */
 .particle-global {
-  position: absolute;
-  inset: 0;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  min-width: 1300px;
+  height: 100vh;
+  min-height: 100vh;
+  z-index: 1;
   pointer-events: none;
   overflow: hidden;
-  z-index: 1;
 }
 
 .particle-layer {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
-  opacity: 0.12;
+  opacity: 0.14;
 }
 
 .particle-canvas {
@@ -113,25 +127,45 @@ body {
 
 .particle-canvas.exclusion {
   mix-blend-mode: exclusion;
+  opacity: 0.35; /* 블랙 파티클 밀도 축소 */
 }
 
-/* 데스크탑/태블릿: 무대 위 오버레이 정보 */
-.info-layer {
-  position: absolute;
-  inset: 0;
+/* 모바일에서 포스터/무대 더 줄이기 */
+@media (max-width: 700px) {
+  :root {
+    --hero-scale: clamp(0.4, 100vw / 1440, 0.7);
+  }
+  .posterLayer {
+    margin-top: 12px;
+    background-size: clamp(240px, 95vw, 1000px) auto;
+  }
+}
 
-  padding: 24px;
+/* IntersectionObserver가 섹션을 잘 잡게 z-index를 위로 */
+.scrollTrack {
+  position: relative;
+  z-index: 10;
+}
+.scrollStep {
+  height: 100vh;
+}
+
+/* 인포 섹션 (포스터 이후 본문) */
+.info-section {
+  background: #ffffff;
+  padding: 32px 24px 60px; /* 여백 축소 및 하단 여유 */
   box-sizing: border-box;
-
-  color: #2b2b2b;
-
   display: flex;
-  align-items: flex-start;
   justify-content: center;
-
-  pointer-events: none;
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  position: relative;
+  z-index: 2; /* 고정 무대 위로 */
 }
+
+.info-section .info-columns {
+  max-width: 1200px;
+}
+
+/* ===== InfoContent 스타일(너가 쓰던 것 유지) ===== */
 
 .info-columns {
   display: grid;
@@ -140,14 +174,12 @@ body {
 
   width: 100%;
   max-width: 1024px;
-  /* margin-top: 900px; 기기마다 다르게*/
 }
 
 .info-col {
   display: flex;
   flex-direction: column;
   gap: 0;
-
   font-size: 16px;
   line-height: 1.4;
 }
@@ -158,23 +190,13 @@ body {
   background-color: #DBDBE1;
   font-size: 15px;
   font-weight: 600;
-  padding: 4px 8px;
-  margin: 0;
-}
-.pName{
-  background-color: #DBDBE1;
-  font-weight: 600;
-  font-size: 16px;
-  padding:  0px 8px;
-   display: inline-block;
+  padding: 2px 6px; /* 글자에 더 핏하게 */
+  width: auto;
+  max-width: 100%;
+  white-space: nowrap;
+  align-self: flex-start;
 }
 
-.pText{
-  font-size: 16px;
-  font-weight: 400;
-  margin-top:12px;
-  margin-bottom: 40px;
-}
 .info-chip {
   display: inline-block;
   padding: 4px 8px;
@@ -182,64 +204,36 @@ body {
   font-size: 16px;
   font-weight: 600;
   width: fit-content;
-  gap:0;
   margin-top: 38px;
 }
 
-.info-content-title{
+.pName {
+  background-color: #DBDBE1;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 0 8px;
+  display: inline-block;
+}
+
+.pText {
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 12px;
+  margin-bottom: 40px;
+}
+
+.info-content-title {
   font-weight: 600;
   font-size: 20px;
-  margin-top: 80px;
   margin-top: 20px;
 }
 
-.info-content-text{
+.info-content-text {
   font-size: 16px;
   font-weight: 400;
 }
-/* 스크롤 길이 확보 */
-.scroll-spacer {
-  width: 100%;
-}
 
-/* 모바일은 한 컬럼 고정 */
-@media (max-width: 699px) {
-  .info-columns {
-    grid-template-columns: 1fr;
-    max-width: 100%;
-    gap: 16px;
-  }
-
-  .info-col {
-    font-size: 13px;
-    line-height: 1.5;
-  }
-
-  .info-chip {
-    font-size: 11px;
-  }
-}
-
-@media (max-width: 1440px) {
-  .info-columns {
-    grid-template-columns: 2,1fr;
-    max-width: 100%;
-    gap: 16px;
-    margin-top: 900px;
-    padding-bottom: 100px;
-  }
-
-  .info-col {
-    font-size: 13px;
-    line-height: 1.5;
-  }
-
-  .info-chip {
-    font-size: 11px;
-  }
-}
-
-/* ===== Credits (교수진/준비위원회) ===== */
+/* ===== Credits ===== */
 .credits {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
@@ -260,13 +254,13 @@ body {
 
 .credits-names {
   display: flex;
-  gap: 24px;
+  flex-direction: row;
+  gap: 20px;
   font-size: 14px;
   font-weight: 600;
   color: #2b2b2b;
 }
 
-/* committee list */
 .committee-list {
   display: flex;
   flex-direction: column;
@@ -291,10 +285,9 @@ body {
   font-weight: 500;
   color: #2b2b2b;
   line-height: 1.6;
-  white-space: nowrap; /* 이미지처럼 한 줄 유지 */
+  white-space: nowrap;
 }
 
-/* 모바일에서는 세로로 */
 @media (max-width: 699px) {
   .credits {
     grid-template-columns: 1fr;
@@ -305,6 +298,35 @@ body {
     gap: 12px 18px;
   }
   .committee-names {
-    white-space: normal; /* 모바일은 줄바꿈 허용 */
+    white-space: normal;
+  }
+}
+
+/* 1440 이하 2컬럼 고정 */
+@media (max-width: 1440px) {
+  .info-columns {
+    grid-template-columns: 1fr 1fr;
+    max-width: 100%;
+    gap: 16px;
+    margin-top: 30px;
+    padding-bottom: 100px;
+  }
+}
+
+/* 모바일 1컬럼 */
+@media (max-width: 699px) {
+  .info-columns {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 16px;
+  }
+
+  .info-col {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .info-chip {
+    font-size: 11px;
   }
 }

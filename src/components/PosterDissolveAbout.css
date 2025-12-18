@@ -1,0 +1,159 @@
+/* 전체 스크롤 */
+.aboutDissolve {
+  position: relative;
+  height: 300vh; /* 3단계 */
+}
+
+/* 단계별 배경(고정) */
+.aboutBg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: #00e1ff;
+  transition: background 0.4s ease;
+}
+
+.aboutBg.bg-blue { background: #00e1ff; }
+.aboutBg.bg-white { background: #ffffff; }
+.aboutBg.bg-gray { background: #f8f8fa; }
+
+/* 스테이지: 포스터 영역 고정 + 1440 스케일 유지 */
+:root { --hero-scale: clamp(0.6, 100vw / 1440, 1); }
+
+.aboutStage {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+
+  width: min(1440px, 100%);
+  margin: 0 auto;
+
+  transform: scale(var(--hero-scale));
+  transform-origin: top center;
+
+  transition: transform 0.6s ease;
+}
+
+/* 2단계에서 위로 살짝 올림 */
+.aboutStage.stage-lift {
+  transform: scale(var(--hero-scale)) translateY(-220px);
+}
+
+/* 포스터 레이어 */
+.posterLayer {
+  position: absolute;
+  inset: 0;
+  background-size: contain;
+  background-position: center top;
+  background-repeat: no-repeat;
+
+  opacity: 0;
+  transition: opacity 0.7s ease-in-out;
+  pointer-events: none;
+}
+
+.posterLayer.is-active {
+  opacity: 1;
+}
+
+/* 인포 오버레이 */
+.infoOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  padding: 24px;
+  box-sizing: border-box;
+
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.infoOverlay.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto; /* 2단계에서 텍스트 선택/스크롤 필요하면 */
+}
+
+/* 스크롤 트랙 */
+.scrollTrack {
+  position: relative;
+  z-index: 10; /* 실제 스크롤 섹션이 위에 있어야 IntersectionObserver가 잘 잡힘 */
+}
+
+.scrollStep {
+  height: 100vh;
+}
+
+/* ===== 아래는 기존 about.css에서 InfoContent 관련만 가져와도 됨 ===== */
+.info-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1024px;
+}
+
+.info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.info-col p {
+  margin: 0;
+  display: inline-block;
+  background-color: #dbdbe1;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 4px 8px;
+}
+
+.info-chip {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: #dbdbe1;
+  font-size: 16px;
+  font-weight: 600;
+  width: fit-content;
+  margin-top: 38px;
+}
+
+.info-content-title {
+  font-weight: 600;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.info-content-text {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* 1440 이하 2컬럼 고정 */
+@media (max-width: 1440px) {
+  .info-columns {
+    grid-template-columns: 1fr 1fr;
+    max-width: 100%;
+    gap: 16px;
+    margin-top: 900px;
+    padding-bottom: 100px;
+  }
+}
+
+/* 모바일 1컬럼 */
+@media (max-width: 699px) {
+  .info-columns {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 16px;
+  }
+}

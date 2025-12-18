@@ -7,11 +7,14 @@
 /* 헤더 전체 배경 */
 .headerWrapper {
   width: 100%;
+  position: relative;
+  z-index: 10; /* 콘텐츠 스택보다 위에 표시 */
 }
 
 /* 실제 헤더 영역 */
 .header {
   width: 100%;
+  background: transparent;
 }
 
 /* 안쪽 그리드에서 헤더 정렬 */

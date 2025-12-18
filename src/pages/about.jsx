@@ -1,39 +1,15 @@
 // src/pages/about.jsx
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import lottieWeb from "lottie-web";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./about.css";
+
 import Poster from "../assets/img/poster.png";
 import PosterWhite from "../assets/img/posterWhite.png";
-
-// particles (Case A: exclusion 적용 가능 가정)
 import particlesDefaultWhite from "../assets/particle/particles-default-white.json";
 import particlesDefaultBlue from "../assets/particle/particles-default-blue.json";
 import particlesExclusion from "../assets/particle/particles-exclusion.json";
-
-const clamp01 = (v) => Math.max(0, Math.min(1, v));
-const smoothstep = (a, b, x) => {
-  const t = clamp01((x - a) / (b - a));
-  return t * t * (3 - 2 * t);
-};
-
-const mixHex = (c1, c2, t) => {
-  const h1 = c1.replace("#", "");
-  const h2 = c2.replace("#", "");
-  const n1 = parseInt(h1.length === 3 ? h1.replace(/(.)/g, "$1$1") : h1, 16);
-  const n2 = parseInt(h2.length === 3 ? h2.replace(/(.)/g, "$1$1") : h2, 16);
-  const r1 = (n1 >> 16) & 255;
-  const g1 = (n1 >> 8) & 255;
-  const b1 = n1 & 255;
-  const r2 = (n2 >> 16) & 255;
-  const g2 = (n2 >> 8) & 255;
-  const b2 = n2 & 255;
-  const r = Math.round(r1 + (r2 - r1) * t);
-  const g = Math.round(g1 + (g2 - g1) * t);
-  const b = Math.round(b1 + (b2 - b1) * t);
-  return `rgb(${r}, ${g}, ${b})`;
-};
 
 function InfoContent() {
   return (
@@ -140,87 +116,112 @@ function InfoContent() {
           </div>
         </div>
 
-{/* 교수진 + 졸업전시준비위원회 (이미지 버전) */}
-<div className="credits">
-  <div className="credits-block">
-    <div className="credits-title">교수진</div>
-    <div className="credits-names">
-      <span>이기한</span>
-      <span>고혜영</span>
-      <span>최종인</span>
-      <span>박수이</span>
-    </div>
-  </div>
+        {/* 교수진 + 졸업전시준비위원회 */}
+        <div className="credits">
+          <div className="credits-block">
+            <div className="credits-title">교수진</div>
+            <div className="credits-names">
+              <span>이기한</span>
+              <span>고혜영</span>
+              <span>최종인</span>
+              <span>박수이</span>
+            </div>
+          </div>
 
-  <div className="credits-block">
-    <div className="credits-title">졸업전시준비위원회</div>
+          <div className="credits-block">
+            <div className="credits-title">졸업전시준비위원회</div>
 
-    <div className="committee-list">
-      <div className="committee-row">
-        <div className="committee-role">위원장</div>
-        <div className="committee-names">한인우</div>
+            <div className="committee-list">
+              <div className="committee-row">
+                <div className="committee-role">위원장</div>
+                <div className="committee-names">한인우</div>
+              </div>
+
+              <div className="committee-row">
+                <div className="committee-role">부위원장</div>
+                <div className="committee-names">이서연</div>
+              </div>
+
+              <div className="committee-row">
+                <div className="committee-role">기획팀</div>
+                <div className="committee-names">장세희&nbsp;&nbsp;&nbsp;김채민&nbsp;&nbsp;&nbsp;홍채원</div>
+              </div>
+
+              <div className="committee-row">
+                <div className="committee-role">재정팀</div>
+                <div className="committee-names">윤지수&nbsp;&nbsp;&nbsp;김은진</div>
+              </div>
+
+              <div className="committee-row">
+                <div className="committee-role">홍보팀</div>
+                <div className="committee-names">최서정&nbsp;&nbsp;&nbsp;남소빈</div>
+              </div>
+
+              <div className="committee-row">
+                <div className="committee-role">그래픽팀</div>
+                <div className="committee-names">김나윤&nbsp;&nbsp;&nbsp;구름&nbsp;&nbsp;&nbsp;이유림</div>
+              </div>
+
+              <div className="committee-row">
+                <div className="committee-role">온라인 전시팀</div>
+                <div className="committee-names">김선화&nbsp;&nbsp;&nbsp;이채민</div>
+              </div>
+
+              <div className="committee-row">
+                <div className="committee-role">전시조성팀</div>
+                <div className="committee-names">
+                  박도희&nbsp;&nbsp;&nbsp;강영은&nbsp;&nbsp;&nbsp;구유나&nbsp;&nbsp;&nbsp;류민주
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div className="committee-row">
-        <div className="committee-role">부위원장</div>
-        <div className="committee-names">이서연</div>
-      </div>
-
-      <div className="committee-row">
-        <div className="committee-role">기획팀</div>
-        <div className="committee-names">장세희&nbsp;&nbsp;&nbsp;김채민&nbsp;&nbsp;&nbsp;홍채원</div>
-      </div>
-
-      <div className="committee-row">
-        <div className="committee-role">재정팀</div>
-        <div className="committee-names">윤지수&nbsp;&nbsp;&nbsp;김은진</div>
-      </div>
-
-      <div className="committee-row">
-        <div className="committee-role">홍보팀</div>
-        <div className="committee-names">최서정&nbsp;&nbsp;&nbsp;남소빈</div>
-      </div>
-
-      <div className="committee-row">
-        <div className="committee-role">그래픽팀</div>
-        <div className="committee-names">김나윤&nbsp;&nbsp;&nbsp;구름&nbsp;&nbsp;&nbsp;이유림</div>
-      </div>
-
-      <div className="committee-row">
-        <div className="committee-role">온라인 전시팀</div>
-        <div className="committee-names">김선화&nbsp;&nbsp;&nbsp;이채민</div>
-      </div>
-
-      <div className="committee-row">
-        <div className="committee-role">전시조성팀</div>
-        <div className="committee-names">박도희&nbsp;&nbsp;&nbsp;강영은&nbsp;&nbsp;&nbsp;구유나&nbsp;&nbsp;&nbsp;류민주</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-        
-      </div>
-      {/* ✅ RIGHT COLUMN 닫힘 */}
+      {/* RIGHT COLUMN 닫힘 */}
     </div>
   );
 }
 
-
 export default function About() {
-  const stackRef = useRef(null);
-  const [scrollSpan, setScrollSpan] = useState(1000);
-  const [progress, setProgress] = useState(0);
-
-  // 파티클
+  const [activeIndex, setActiveIndex] = useState(0);
+  const stepRefs = useRef([]);
+  const infoSectionRef = useRef(null);
+  const [infoVisible, setInfoVisible] = useState(false);
+  // 파티클 컨테이너
   const mainParticleRef = useRef(null);
   const mainExclusionRef = useRef(null);
   const subParticleRef = useRef(null);
   const subExclusionRef = useRef(null);
 
-  const TOTAL = 1.4;
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const idx = Number(entry.target.dataset.index);
+          setActiveIndex(idx);
+        });
+      },
+      { threshold: 0.55 }
+    );
 
+    stepRefs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  // 인포 섹션 등장 감지 -> 파티클 숨김
+  useEffect(() => {
+    const el = infoSectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setInfoVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // 파티클 로드 (lottie)
   useEffect(() => {
     const load = (container, data, blend) => {
       if (!container) return null;
@@ -244,114 +245,69 @@ export default function About() {
     return () => [a1, a2, b1, b2].forEach((a) => a?.destroy?.());
   }, []);
 
-  useEffect(() => {
-    const updateSpan = () => {
-      const h = window.innerHeight;
-      // 1440+ 환경에서도 충분히 길게 스크롤할 수 있도록 여유 확보
-      setScrollSpan(Math.max(1500, h * 1.5));
-    };
-    updateSpan();
-    window.addEventListener("resize", updateSpan);
-    return () => window.removeEventListener("resize", updateSpan);
-  }, []);
-
-  useEffect(() => {
-    let ticking = false;
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const span = scrollSpan || 1;
-        const p = window.scrollY / span;
-        setProgress(p);
-        ticking = false;
-      });
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [scrollSpan]);
-
-  const t = smoothstep(0.1, 0.9, progress);
-  const bgColor = useMemo(() => mixHex("#00E1FF", "#FFFFFF", t), [t]);
-
-  const stage1 = clamp01(progress);
-  const stage2 = clamp01((progress - 0.7) / 0.3);
-
-  const posterOpacity = 1 - stage1;
-  const whiteOpacity = 0.9 * stage1;
-  const particleFade = 1 - stage2;
-
-  const infoOpacity = stage2;
-  const infoTranslate = 24 * (1 - stage2);
-  // 포스터가 위로 올라가는 추가 구간
-  const posterLift = clamp01((progress - 1) / 0.3); // 1 이후 0.3 동안 위로 이동
-  const posterTranslateY = -220 * posterLift;
-  const bgGradient = `linear-gradient(180deg, ${bgColor} 0%, #f8f8fa 100%)`;
-
   return (
     <>
       <Header />
-      <main className="page" style={{ background: bgGradient }}>
-        <div className="inner">
-          <div className="hero-frame">
+
+      <main className="aboutWrap">
+        {/* 단계별 배경 */}
+        <div
+          className={`aboutBg ${
+            activeIndex === 0 ? "bg-blue" : activeIndex === 1 ? "bg-white" : "bg-gray"
+          }`}
+        />
+
+        {/* 고정 무대(포스터) */}
+        <div className={`stageFixed ${activeIndex === 2 ? "lift" : ""}`}>
+          {/* 0단계: 파란 포스터 */}
+          <div
+            className={`posterLayer ${activeIndex === 0 ? "is-active" : ""}`}
+            style={{ backgroundImage: `url(${Poster})` }}
+          />
+
+          {/* 1~2단계: 흰 포스터 */}
+          <div
+            className={`posterLayer ${activeIndex >= 1 ? "is-active" : ""}`}
+            style={{ backgroundImage: `url(${PosterWhite})` }}
+          />
+
+          {/* 파티클 오버레이 (Case A) */}
+          <div className="particle-global">
             <div
-              className="poster-bg"
-              style={{
-                transform: `translateY(${posterTranslateY}px)`,
-              }}
+              className="particle-layer"
+              style={{ opacity: infoVisible ? 0 : activeIndex === 0 ? 1 : 0 }}
             >
-              <div
-                className="poster-layer-img"
-                style={{
-                  opacity: posterOpacity,
-                  backgroundImage: `url(${Poster})`,
-                }}
-              />
-              <div
-                className="poster-layer-img"
-                style={{
-                  opacity: whiteOpacity,
-                  backgroundImage: `url(${PosterWhite})`,
-                }}
-              />
+              <div className="particle-canvas" ref={mainParticleRef} />
+              <div className="particle-canvas exclusion" ref={mainExclusionRef} />
             </div>
-
-            <div className="particle-global">
-              <div className="particle-layer main" style={{ opacity: posterOpacity * particleFade }}>
-                <div className="particle-canvas" ref={mainParticleRef} />
-                <div className="particle-canvas exclusion" ref={mainExclusionRef} />
-              </div>
-
-              <div className="particle-layer sub" style={{ opacity: whiteOpacity * particleFade }}>
-                <div className="particle-canvas" ref={subParticleRef} />
-                <div className="particle-canvas exclusion" ref={subExclusionRef} />
-              </div>
-            </div>
-
-            <div className="contentWrapper">
-              <div className="poster-stack" ref={stackRef} />
-
-              <div
-                className="info-layer"
-                style={{
-                  opacity: infoOpacity,
-                  transform: `translateY(${infoTranslate}px)`,
-                }}
-              >
-                <InfoContent />
-              </div>
+            <div
+              className="particle-layer"
+              style={{ opacity: infoVisible ? 0 : activeIndex >= 1 ? 1 : 0 }}
+            >
+              <div className="particle-canvas" ref={subParticleRef} />
+              <div className="particle-canvas exclusion" ref={subExclusionRef} />
             </div>
           </div>
-
-          <div className="scroll-spacer" style={{ height: scrollSpan * (TOTAL + 1) }} />
         </div>
+
+        {/* 스크롤 트랙(3장) */}
+        <div className="scrollTrack">
+          {[0, 1, 2].map((i) => (
+            <section
+              key={i}
+              className="scrollStep"
+              data-index={i}
+              ref={(el) => (stepRefs.current[i] = el)}
+            />
+          ))}
+        </div>
+
+        {/* 인포 섹션: 포스터 이후 본문 영역 */}
+        <section className="info-section" ref={infoSectionRef}>
+          <InfoContent />
+        </section>
       </main>
+
       <Footer />
     </>
   );
