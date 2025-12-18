@@ -94,34 +94,62 @@
 }
 
 /* =========================================
-   모바일 사이드 메뉴
+   모바일 메뉴 레이어 (핵심 수정)
+   - backdrop이 메뉴 위를 덮는 문제를 원천 차단
+   - menu-layer(최상단 fixed) 안에 backdrop + panel을 같이 둠
 ========================================= */
-.side-menu {
+
+/* 메뉴 전체 레이어: 닫혀있을 때는 클릭/터치 완전 차단 */
+.menu-layer {
   position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-out;
+}
+
+/* 열렸을 때만 활성화 */
+.menu-layer.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* backdrop: 화면 전체 덮기 */
+.menu-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* 메뉴 패널 */
+.menu-panel {
+  position: absolute;
   top: 0;
   right: 0;
   width: 280px;
   height: 100vh;
   background: #ffffff;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.08);
+
   transform: translateX(100%);
   transition: transform 0.25s ease-out;
+
   padding: 80px 24px 24px;
 
-  /* 핵심: 메뉴가 backdrop보다 위 */
-  z-index: 9999;
+  /* backdrop보다 위 */
+  z-index: 1;
 
   will-change: transform;
-
-  /* 핵심: 닫힌 상태에서는 클릭 못 하게 */
-  pointer-events: none;
 }
 
-.side-menu.is-open {
+/* 메뉴 열림 상태에서 패널 등장 */
+.menu-layer.is-open .menu-panel {
   transform: translateX(0);
-  pointer-events: auto;
 }
 
+/* 기존 네비 클래스 그대로 재사용 */
 .side-menu-nav {
   display: flex;
   flex-direction: column;
@@ -137,30 +165,9 @@
   line-height: 1.4;
 }
 
-/* backdrop */
-.side-menu-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0);
-  opacity: 0;
-
-  /* 닫혀있을 땐 클릭 불가 */
-  pointer-events: none;
-
-  transition: opacity 0.2s ease-out;
-
-  /* 메뉴보다 아래 */
-  z-index: 9998;
-}
-
-.side-menu-backdrop.is-open {
-  background: rgba(0, 0, 0, 0.2);
-  opacity: 1;
-  pointer-events: auto;
-}
-
 /* =========================================
    2) 700px 이상: 태블릿 / 데스크탑
+   - 상단 nav 보이고 햄버거/모바일 레이어 숨김
 ========================================= */
 @media (min-width: 700px) {
   .header-inner {
@@ -179,8 +186,8 @@
     display: none;
   }
 
-  .side-menu,
-  .side-menu-backdrop {
+  /* 데스크탑에서는 모바일 메뉴 레이어 자체 숨김 */
+  .menu-layer {
     display: none;
   }
 }

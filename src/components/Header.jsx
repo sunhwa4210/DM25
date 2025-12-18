@@ -9,7 +9,6 @@ import MenuIcon from "../assets/img/menu.svg";
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // 디바이스 타입 (너가 이미 만든 훅 그대로 사용)
   const { isDesktop, isTablet, isMobile, isSmallMobile } = useDeviceType();
 
   const isPcLayout = isDesktop || isTablet; // 700 이상
@@ -26,7 +25,6 @@ function Header() {
             <img src={Logo} alt="logo" />
           </div>
 
-          {/* 데스크탑/태블릿용 메뉴 */}
           {isPcLayout && (
             <nav className="header-nav">
               <Link to="/">About</Link>
@@ -35,7 +33,6 @@ function Header() {
             </nav>
           )}
 
-          {/* 모바일용 햄버거 버튼 */}
           {isMobileLayout && (
             <button
               className="menu-button"
@@ -50,23 +47,14 @@ function Header() {
         </div>
       </header>
 
-      {/* 모바일에서만 사이드 메뉴 */}
+      {/* 모바일 메뉴: 최상단 레이어로 묶어서 stacking 충돌 차단 */}
       {isMobileLayout && (
-        <>
-          {/* backdrop: 메뉴 바깥 클릭 시 닫기 */}
-          <div
-            className={`side-menu-backdrop ${isMenuOpen ? "is-open" : ""}`}
-            onClick={closeMenu}
-          />
+        <div className={`menu-layer ${isMenuOpen ? "is-open" : ""}`}>
+          {/* backdrop */}
+          <div className="menu-backdrop" onClick={closeMenu} />
 
-          {/* side menu: 내부 클릭이 backdrop으로 버블링되지 않게 막기 */}
-          <aside
-            className={`side-menu ${isMenuOpen ? "is-open" : ""}`}
-            onClick={(e) => e.stopPropagation()}
-            role="dialog"
-            aria-modal="true"
-            aria-hidden={!isMenuOpen}
-          >
+          {/* panel */}
+          <aside className="menu-panel">
             <nav className="side-menu-nav">
               <Link to="/" onClick={closeMenu}>
                 About
@@ -79,7 +67,7 @@ function Header() {
               </Link>
             </nav>
           </aside>
-        </>
+        </div>
       )}
     </div>
   );
