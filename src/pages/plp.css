@@ -19,7 +19,7 @@
   max-width: 100%;
   height: auto;
   font-weight: 760;
-  font-size: clamp(32px, 7vw, 64px); /* 반응형 스케일 */
+  font-size: clamp(24px, 6vw, 64px); /* 더 작은 화면에서도 줄어듦 */
 }
 
 .sub-title{
