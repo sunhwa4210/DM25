@@ -9,6 +9,8 @@
   width: 100%;
   position: relative;
   z-index: 10; /* 콘텐츠 스택보다 위에 표시 */
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 
 /* 실제 헤더 영역 */
@@ -28,7 +30,7 @@
 /* 로고 영역 */
 .header-logo img {
   display: block;
-  height: 28px;                     /* 모바일에서 살짝 작게 */
+  height: 26px;                     /* 360 이하에서도 안전 */
 }
 
 /* 데스크탑 네비게이션: 기본(모바일)에서는 숨김 */

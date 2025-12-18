@@ -7,6 +7,7 @@ import "./about.css";
 
 import Poster from "../assets/img/poster.png";
 import PosterWhite from "../assets/img/posterWhite.png";
+import BottomIcon from "../assets/img/bottom.svg";
 import particlesDefaultWhite from "../assets/particle/particles-default-white.json";
 import particlesDefaultBlue from "../assets/particle/particles-default-blue.json";
 import particlesExclusion from "../assets/particle/particles-exclusion.json";
@@ -288,6 +289,13 @@ export default function About() {
               <div className="particle-canvas exclusion" ref={subExclusionRef} />
             </div>
           </div>
+
+          {/* 스크롤 안내 아이콘 (1~2 단계에서 표시) */}
+          {(activeIndex === 0 || activeIndex === 1) && (
+            <div className="scroll-hint">
+              <img src={BottomIcon} alt="scroll down" />
+            </div>
+          )}
         </div>
 
         {/* 스크롤 트랙(3장) */}
