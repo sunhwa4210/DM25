@@ -13,7 +13,7 @@ export default function Footer() {
             <img className="footer-title" src={FooterTitle} alt="(NULL) is not Empty" />
             <a
               className="footer-instaLink"
-              href="https://instagram.com/"
+              href="https://www.instagram.com/swu_dm_2025?igsh=MTE5OHpzeDd4eGV2OA=="
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram"

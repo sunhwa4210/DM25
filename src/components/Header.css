@@ -1,5 +1,5 @@
 /* =========================================
-   1) 기본 구간: 모바일 (360 ~ 699)
+   1) 기본 구간: 모바일 (250 ~ 699)
    - 모바일에서는 햄버거 버튼만 보이고
    - 상단 nav는 숨겨두는 기준으로 잡을게
 ========================================= */
@@ -33,10 +33,10 @@
   height: 26px;                     /* 360 이하에서도 안전 */
 }
 
-/* 초소형 디바이스 보정 */
-@media (max-width: 360px) {
+/* 초소형 디바이스 보정 (250~359) */
+@media (max-width: 359px) {
   .headerWrapper {
-    padding: 0 10px;
+    padding: 0 8px;
   }
   .header-inner {
     height: 52px;
@@ -80,6 +80,16 @@
   height: 2px;
   border-radius: 1px;
   background: #111;
+}
+
+/* 250~699 구간: 모바일 동작 보장(햄버거 보이고 nav 숨김) */
+@media (max-width: 699px) {
+  .header-nav {
+    display: none;
+  }
+  .menu-button {
+    display: inline-flex;
+  }
 }
 
 /* 모바일 사이드 메뉴 */
