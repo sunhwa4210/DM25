@@ -1,0 +1,39 @@
+/* 0. 기본 글꼴 연결 */
+@font-face {
+  font-family: 'SF pro';
+  src: url('/dm2025/src/assets/font/SF-Pro.ttf');
+}
+
+/* 1. 공통 기본값 (모바일 기준, 360 이상 가정) */
+body {
+  margin: 0;
+  background-color: #00E1FF;
+  min-width: 360px;              /* 360보다 작은 화면은 360으로 고정 */
+  font-family: 'SF pro', -apple-system, system-ui, sans-serif;
+}
+
+#root {
+  width: 100%;
+}
+
+/* 2. 기본 레이아웃 그리드: 모바일(360 ~ 699) 기준 */
+.inner {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;               /* 모바일은 좌우 16px */
+  box-sizing: border-box;
+}
+
+/* 3. 700px 이상: 태블릿 / 작은 PC */
+@media (min-width: 700px) {
+  .inner {
+    padding: 0 40px;             /* 좌우 여백 넓게 */
+  }
+}
+
+/* 4. 1440px 이상: 큰 데스크탑 */
+@media (min-width: 1440px) {
+  .inner {
+    max-width: 1440px;           /* 가운데 1440 박스로 고정 */
+  }
+}

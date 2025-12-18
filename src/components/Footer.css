@@ -1,0 +1,140 @@
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+
+  /* 바깥(회색 배경) */
+  background: white;
+  padding: 32px 40px;
+  box-sizing: border-box;
+}
+
+.footer-inner {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  background: #fff;
+  border-radius: 6px;
+  padding: 18px 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+
+  box-sizing: border-box;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0; /* 긴 텍스트 있을 때 레이아웃 안 깨지게 */
+}
+
+.footer-toprow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-title {
+  height: 22px;
+  width: auto;
+  display: block;
+  max-width: 60vw;
+}
+
+.footer-instaLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+}
+
+.footer-insta {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.footer-text {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.35;
+  color: #777;
+  word-break: keep-all;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+}
+
+.footer-school {
+  height: 34px;
+  width: auto;
+  display: block;
+  max-width: 140px;
+}
+
+/* 태블릿: 여백/사이즈 축소, 줄바꿈 허용 */
+@media (max-width: 1024px) {
+  .footer {
+    padding: 12px;
+  }
+
+  .footer-inner {
+    padding: 16px;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .footer-title {
+    height: 20px;
+  }
+
+  .footer-school {
+    height: 30px;
+    max-width: 120px;
+  }
+}
+
+/* 모바일(세로 배치) */
+@media (max-width: 520px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 16px;
+    gap: 12px;
+    max-height: 205px;
+  }
+
+  .footer-toprow {
+    width: 100%;
+    justify-content: space-between; /* 제목 왼쪽, 인스타 오른쪽 */
+  }
+
+  .footer-title {
+    height: 18px;
+    max-width: 70vw;
+  }
+
+  .footer-school {
+    height: 26px;
+    max-width: 110px;
+    text-align: left;
+    align-self: flex-start;
+  }
+
+  .footer-text {
+    font-size: 10px;
+  }
+}

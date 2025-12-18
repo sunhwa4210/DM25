@@ -1,0 +1,310 @@
+html,
+body {
+  background: #00E1FF;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --hero-scale: clamp(0.6, 100vw / 1440, 1);
+}
+
+.page {
+  background: #00E1FF;
+  min-height: 180vh; /* 여유 스크롤 */
+}
+
+.inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* 무대: sticky */
+.hero-frame {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  width: min(1440px, 100%);
+  margin: 0 auto;
+
+  transform: scale(var(--hero-scale));
+  transform-origin: top center;
+}
+
+/* 배경 포스터 */
+.poster-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  transition: transform 0.6s ease;
+}
+
+.poster-layer-img {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: contain;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+/* 콘텐츠 */
+.contentWrapper {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 0;
+  z-index: 2;
+}
+
+.title {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* 포스터 영역 높이 기준 */
+.poster-stack {
+  position: relative;
+  width: 100%;
+  margin: 0;
+}
+
+.poster-stack::before {
+  content: "";
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+}
+
+/* 파티클 */
+.particle-global {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.particle-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.12;
+}
+
+.particle-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.particle-canvas.exclusion {
+  mix-blend-mode: exclusion;
+}
+
+/* 데스크탑/태블릿: 무대 위 오버레이 정보 */
+.info-layer {
+  position: absolute;
+  inset: 0;
+
+  padding: 24px;
+  box-sizing: border-box;
+
+  color: #2b2b2b;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  pointer-events: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.info-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+
+  width: 100%;
+  max-width: 1024px;
+  /* margin-top: 900px; 기기마다 다르게*/
+}
+
+.info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.info-col p {
+  margin: 0;
+  display: inline-block;
+  background-color: #DBDBE1;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 4px 8px;
+  margin: 0;
+}
+.pName{
+  background-color: #DBDBE1;
+  font-weight: 600;
+  font-size: 16px;
+  padding:  0px 8px;
+   display: inline-block;
+}
+
+.pText{
+  font-size: 16px;
+  font-weight: 400;
+  margin-top:12px;
+  margin-bottom: 40px;
+}
+.info-chip {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: #DBDBE1;
+  font-size: 16px;
+  font-weight: 600;
+  width: fit-content;
+  gap:0;
+  margin-top: 38px;
+}
+
+.info-content-title{
+  font-weight: 600;
+  font-size: 20px;
+  margin-top: 80px;
+  margin-top: 20px;
+}
+
+.info-content-text{
+  font-size: 16px;
+  font-weight: 400;
+}
+/* 스크롤 길이 확보 */
+.scroll-spacer {
+  width: 100%;
+}
+
+/* 모바일은 한 컬럼 고정 */
+@media (max-width: 699px) {
+  .info-columns {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 16px;
+  }
+
+  .info-col {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .info-chip {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .info-columns {
+    grid-template-columns: 2,1fr;
+    max-width: 100%;
+    gap: 16px;
+    margin-top: 900px;
+    padding-bottom: 100px;
+  }
+
+  .info-col {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .info-chip {
+    font-size: 11px;
+  }
+}
+
+/* ===== Credits (교수진/준비위원회) ===== */
+.credits {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 48px;
+  margin-top: 60px;
+  align-items: start;
+}
+
+.credits-title {
+  display: inline-block;
+  background: #2b2b2b;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 6px 10px;
+  margin-bottom: 18px;
+}
+
+.credits-names {
+  display: flex;
+  gap: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+/* committee list */
+.committee-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.committee-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 18px;
+  align-items: baseline;
+}
+
+.committee-role {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2b2b2b;
+}
+
+.committee-names {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2b2b2b;
+  line-height: 1.6;
+  white-space: nowrap; /* 이미지처럼 한 줄 유지 */
+}
+
+/* 모바일에서는 세로로 */
+@media (max-width: 699px) {
+  .credits {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .credits-names {
+    flex-wrap: wrap;
+    gap: 12px 18px;
+  }
+  .committee-names {
+    white-space: normal; /* 모바일은 줄바꿈 허용 */
+  }
+}

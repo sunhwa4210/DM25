@@ -1,0 +1,40 @@
+.project-card {
+  width: 328px;
+  height: 402px;
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.project-thumb {
+  aspect-ratio: 1 / 1;
+  background: #dfffe1;
+  overflow: hidden;
+}
+
+.project-thumb img {
+  width: 328px;
+  height: 328px;
+  object-fit: cover;
+  display: block;
+}
+
+.project-body {
+  padding: 10px 0 0;
+}
+
+.project-title {
+  font-weight: 700;
+  font-size: 24px;
+  margin-bottom: 6px;
+  color: #383843;
+}
+
+.project-members {
+
+  font-size: 18px;
+  color: #77778D;
+  font-weight: 400;
+}

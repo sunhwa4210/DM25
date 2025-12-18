@@ -1,0 +1,99 @@
+/* src/components/TeamCard/TeamCard.css */
+
+.memberGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 0px;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+  .memberGrid {
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  .memberGrid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
+@media (max-width: 520px) {
+  .memberGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.memberCard {
+  border: 1px solid #E6E6EA;
+  background: #fff;
+  padding: 20px;
+  max-width: 334px;
+  height: 179px;
+}
+
+.memberNames {
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+
+
+.nameEn {
+
+margin-bottom: 8px;
+}
+
+.roleBadge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0px 4px;
+  background: #00E1FF;
+  color: #0f1a1d;
+  margin-bottom: 12px;
+}
+
+.memberMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #9090A2;
+  font-size: 13px;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.metaIcon {
+  color: #9090A2;
+  flex: 0 0 auto;
+}
+
+.metaLink {
+  font-size: 16px;
+  font-weight: 400;
+  color: #9090A2;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.metaLink:hover {
+  text-decoration: underline;
+}
+
+.metaText {
+  font-size: 16px;
+  font-weight: 400;
+  color: #9090A2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
