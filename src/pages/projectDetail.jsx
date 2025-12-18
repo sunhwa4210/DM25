@@ -39,7 +39,7 @@ export default function ProjectDetail() {
           <Link className="project-detail-link" to="/plp">
             <img src={Back}/>
           </Link>
-          <div className="project-detail-title">{project.title}</div>
+          <div className="project-detail-title-pd">{project.title}</div>
 
           {/* subDescription */}
           {project.subDescription && (

@@ -17,10 +17,7 @@ export default function Plp() {
 
   const [activeKey, setActiveKey] = useState("all");
 
-  const activeTab = useMemo(
-    () => TABS.find((tab) => tab.key === activeKey),
-    [activeKey, TABS]
-  );
+  const activeTab = TABS.find((tab) => tab.key === activeKey);
 
   const filteredProjects = useMemo(() => {
     if (activeKey === "all") return PROJECTS;

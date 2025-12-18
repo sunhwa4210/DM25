@@ -19,13 +19,13 @@
   max-width: 100%;
   height: auto;
   font-weight: 760;
-  font-size: 64px;
+  font-size: clamp(32px, 7vw, 64px); /* 반응형 스케일 */
 }
 
 .sub-title{
     margin-top: 32px;
     font-weight: 600;
-    font-size: 18px;
+    font-size: clamp(14px, 3.5vw, 18px);
     background-color: #00E1FF;
     padding: 6px 10px;
 }
@@ -81,6 +81,7 @@ border: none;
     width: 100%;
     max-width: 360px;
     justify-items: center;
+    color: black;
   }
   .sub-title{
     align-items: center;

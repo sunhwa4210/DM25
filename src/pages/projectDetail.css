@@ -15,7 +15,7 @@
 }
 
 .project-detail-title-pd {
-  font-size: 32px;
+  font-size: clamp(20px, 4vw, 32px);
   font-weight: 700;
   text-align: left;
   background-color: black;
@@ -57,7 +57,7 @@
 
 .project-detail-subdescription {
   color: #333;
-  font-size: 14px;
+  font-size: clamp(14px, 3.5vw, 24px);
   width: fit-content;
   white-space: nowrap; 
   margin-left: 40px;
@@ -118,7 +118,7 @@
 
 .project-detail-subdescription{
   font-weight: 500;
-  font-size: 32px;
+  font-size: clamp(18px, 4vw, 32px);
   background-color: #00E1FF;
   display: inline-block;
   padding: 6px 10px;
@@ -146,7 +146,7 @@ margin-bottom: 24px;
 }
 
 .project-detail-team{
-  font-size: 32px;
+  font-size: clamp(20px, 4vw, 32px);
   font-weight: 700;
   text-align: left;
   background-color: black;
@@ -159,7 +159,23 @@ margin-bottom: 24px;
 }
 
 .team{
-  font-size: 24px;
+  font-size: clamp(16px, 3vw, 24px);
   font-weight: 400;
   margin-right: 8px;
+}
+
+@media (max-width: 700px) {
+  .project-detail-body-pd {
+    padding: 24px 16px 60px;
+  }
+  .project-detail-info {
+    align-items: flex-start;
+  }
+
+  .project-detail-subdescription {
+    margin-left: 16px;
+  }
+  .project-detail-team {
+    margin-top: 48px;
+  }
 }
