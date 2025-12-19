@@ -7,7 +7,7 @@ body {
 :root {
   --hero-scale: clamp(0.5, 100vw / 1440, 1); /* 화면 줄어들수록 무대 축소 */
 
-    --particle-scale: clamp(0.78, 100vw / 1440, 1);
+    --particle-scale: clamp(0.9, 100vw / 1440, 1);
     /* 파티클 사이즈  */
 }
 
