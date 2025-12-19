@@ -121,7 +121,7 @@ Day.zip은 이런 문제에서 출발한 감정 루틴 앱이다. 텍스트 대�
       },
       {
         nameKr: "김선화",
-        nameEn: "kimsunhwa",
+        nameEn: "Sunhwa Kim",
         role: "front-end & back-end",
         email: "sunhwa4210@naver.com",
         link: "https://github.com/sunhwa4210",
@@ -256,14 +256,14 @@ Day.zip은 이런 문제에서 출발한 감정 루틴 앱이다. 텍스트 대�
       {
         nameKr: "임채은",
         nameEn: "Chaeeun Lim",
-        role: "개발자",
+        role: "developer",
         email: "chaeeunlim106@gmail.com",
         link: "https://github.com/limce106",
       },
       {
         nameKr: "구유나",
         nameEn: "Yuna Koo",
-        role: "게임 개발",
+        role: "game developer",
         email: "rndbsk9@swu.ac.kr",
         link: "https://github.com/konguksu",
       },
@@ -380,7 +380,7 @@ Day.zip은 이런 문제에서 출발한 감정 루틴 앱이다. 텍스트 대�
     members: [
       {
         nameKr: "류민주",
-        nameEn: "Ryu Min Ju",
+        nameEn: "Minju Ryu",
         role: "designer / pm",
         email: "fbalswn724@naver.com",
         link: "",
@@ -394,8 +394,8 @@ Day.zip은 이런 문제에서 출발한 감정 루틴 앱이다. 텍스트 대�
       },
       {
         nameKr: "민서진",
-        nameEn: "Min Seo jin",
-        role: "프로젝트 기획, 개발",
+        nameEn: "Seojin Min",
+        role: "plan / developer",
         email: "memorydaisy99@gmail.com",
         link: "@22.9md",
       },
@@ -497,7 +497,7 @@ Day.zip은 이런 문제에서 출발한 감정 루틴 앱이다. 텍스트 대�
       {
         nameKr: "남윤지",
         nameEn: "Yunji Nam",
-        role: "클라이언트 개발",
+        role: "Client Programming",
         email: "njs07080@gmail.com",
         link: "https://github.com/njs07080",
       },
@@ -609,7 +609,7 @@ Day.zip은 이런 문제에서 출발한 감정 루틴 앱이다. 텍스트 대�
         nameEn: "Hyunjung Cho",
         role: "PM",
         email: "hyeonjeongjo47@gmail.com",
-        link: "https://www.behance.net/hyeonjeongjo1",
+        link: "https://www.behance.net/hjcho22",
       },
     ],
     thumbnail: dotThumb,
@@ -667,7 +667,7 @@ Day.zip은 이런 문제에서 출발한 감정 루틴 앱이다. 텍스트 대�
     members: [
       {
         nameKr: "박도희",
-        nameEn: "Park Do Hee",
+        nameEn: "Dohee Park",
         role: "designer",
         email: "dohee893@gmail.com",
         link: "@dohee_eeydo",
@@ -730,7 +730,7 @@ Day.zip은 이런 문제에서 출발한 감정 루틴 앱이다. 텍스트 대�
     id: "p17",
     title: "MU",
     category: "app",
-    subDescription: "당신의 성향에 딱 맞춘 바윰 서비스",
+    subDescription: "당신의 성향에 딱 맞춘 비움 서비스",
     description:
       "MU는 효율적인 공간 활용을 목적으로 사용자의 비움 성향에 맞춘 비움 실천 서비스입니다. 한정된 공간을 여유롭게 활용하기 위한 첫 단계 비움. 비워야 공간이 생긴다는 간단한 개념을 바로 실천할 수 있도록 도와드립니다.",
     teamName: "치우개",

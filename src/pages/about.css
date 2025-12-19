@@ -6,6 +6,9 @@ body {
 
 :root {
   --hero-scale: clamp(0.5, 100vw / 1440, 1); /* 화면 줄어들수록 무대 축소 */
+
+    --particle-scale: clamp(0.78, 100vw / 1440, 1);
+    /* 파티클 사이즈  */
 }
 
 /* 전체 래퍼: 단계 수에 맞게 자동 높이 확보 */
@@ -156,6 +159,8 @@ body {
 @media (max-width: 700px) {
   :root {
     --hero-scale: clamp(0.4, 100vw / 1440, 0.7);
+
+     --particle-scale: clamp(0.4, 100vw / 1440, 0.7);
   }
   .posterLayer {
     margin-top: 12px;
