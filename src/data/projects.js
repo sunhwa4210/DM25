@@ -693,7 +693,7 @@ Day.zip은 이런 문제에서 출발한 감정 루틴 앱이다. 텍스트 대�
   },
   {
     id: "p16",
-    title: "Four footsteps",
+    title: "네 발자국(Four footsteps)",
     category: "game",
     subDescription: "유기묘 2d 내러티브 어드벤처 게임",
     description:
