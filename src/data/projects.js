@@ -207,14 +207,14 @@ Day.zip은 이런 문제에서 출발한 감정 루틴 앱이다. 텍스트 대�
       {
         nameKr: "이채민",
         nameEn: "Chaemin Lee",
-        role: "fullstack",
+        role: "Full-stack Developer",
         email: "coals329@naver.com",
         link: "",
       },
       {
         nameKr: "하규원",
         nameEn: "Kyuwon Ha",
-        role: "front-end, back-end",
+        role: "Full-stack Developer",
         email: "kyu10225@naver.com",
         link: "https://github.com/hakyuwon",
       },
