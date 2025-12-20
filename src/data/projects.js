@@ -38,7 +38,7 @@ import clockContent from "../assets/img/contents/clock_content.jpg";
 import dalContent from "../assets/img/contents/dal_content.jpg";
 import dayzipContent from "../assets/img/contents/dayzip_content.jpg";
 import dodadaContent from "../assets/img/contents/dodada_content.jpg";
-import dotContent from "../assets/img/contents/dot_content.jpg";
+import dotContent from "../assets/img/contents/dot_content.jpeg";
 import feelEmContent from "../assets/img/contents/feel'em_content.jpg";
 import fourContent from "../assets/img/contents/four_content.jpg";
 import livroomContent from "../assets/img/contents/livroom_content.jpg";
