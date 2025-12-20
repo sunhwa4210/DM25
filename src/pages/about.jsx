@@ -238,39 +238,50 @@ export default function About() {
 
   // 인포 섹션 등장 감지 -> 파티클 숨김
   useEffect(() => {
-    const el = infoSectionRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => setInfoVisible(entry.isIntersecting),
-      { threshold: 0.1 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+  const load = (container, data, blend) => {
+    if (!container) return null;
 
-  // 파티클 로드 (lottie)
-  useEffect(() => {
-    const load = (container, data, blend) => {
-      if (!container) return null;
-      container.innerHTML = "";
-      const anim = lottieWeb.loadAnimation({
-        container,
-        renderer: "svg",
-        loop: true,
-        autoplay: true,
-        animationData: data,
-      });
-      if (blend) container.style.mixBlendMode = blend;
-      return anim;
-    };
+    container.innerHTML = "";
 
-    const a1 = load(mainParticleRef.current, particlesDefaultWhite);
-    const a2 = load(mainExclusionRef.current, particlesExclusion, "exclusion");
-    const b1 = load(subParticleRef.current, particlesDefaultBlue);
-    const b2 = load(subExclusionRef.current, particlesExclusion, "exclusion");
+    const anim = lottieWeb.loadAnimation({
+      container,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: data,
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice", // ✅ 화면 꽉 채우기(잘림 허용)
+      },
+    });
 
-    return () => [a1, a2, b1, b2].forEach((a) => a?.destroy?.());
-  }, []);
+    if (blend) container.style.mixBlendMode = blend;
+
+    // ✅ 배포에서 첫 렌더 타이밍 보정
+    requestAnimationFrame(() => anim.resize());
+    setTimeout(() => anim.resize(), 50);
+
+    return anim;
+  };
+
+  const a1 = load(mainParticleRef.current, particlesDefaultWhite);
+  const a2 = load(mainExclusionRef.current, particlesExclusion, "exclusion");
+  const b1 = load(subParticleRef.current, particlesDefaultBlue);
+  const b2 = load(subExclusionRef.current, particlesExclusion, "exclusion");
+
+  const anims = [a1, a2, b1, b2].filter(Boolean);
+
+  const onResize = () => anims.forEach((a) => a.resize && a.resize());
+  window.addEventListener("resize", onResize);
+
+  // ✅ 마운트 직후에도 한 번 더
+  onResize();
+
+  return () => {
+    window.removeEventListener("resize", onResize);
+    anims.forEach((a) => a?.destroy?.());
+  };
+}, []);
+
 
   return (
     <>
